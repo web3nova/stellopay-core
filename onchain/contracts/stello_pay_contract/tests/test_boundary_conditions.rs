@@ -14,7 +14,7 @@
 #![allow(clippy::useless_conversion)]
 
 use soroban_sdk::{
-    testutils::{Address as _, Ledger},
+    testutils::{Address as _, Ledger as _},
     Address, Env,
 };
 use stello_pay_contract::{
@@ -162,7 +162,7 @@ fn test_escrow_zero_amount_per_period_rejected() {
         &86400u64,
         &4u32,
     );
-    assert_eq!(result, Err(Ok(PayrollError::ZeroAmountPerPeriod.into())));
+    assert_eq!(result, Err(Ok(PayrollError::ZeroAmountPerPeriod)));
 }
 
 /// Verifies that creating an escrow agreement with a negative amount_per_period
@@ -186,7 +186,7 @@ fn test_escrow_negative_amount_per_period_rejected() {
         &86400u64,
         &4u32,
     );
-    assert_eq!(result, Err(Ok(PayrollError::ZeroAmountPerPeriod.into())));
+    assert_eq!(result, Err(Ok(PayrollError::ZeroAmountPerPeriod)));
 }
 
 /// Verifies that creating an escrow agreement with `i128::MIN` as
@@ -210,7 +210,7 @@ fn test_escrow_i128_min_amount_per_period_rejected() {
         &86400u64,
         &4u32,
     );
-    assert_eq!(result, Err(Ok(PayrollError::ZeroAmountPerPeriod.into())));
+    assert_eq!(result, Err(Ok(PayrollError::ZeroAmountPerPeriod)));
 }
 
 /// Verifies that creating an escrow agreement with the minimum valid amount
@@ -321,7 +321,7 @@ fn test_escrow_zero_num_periods_rejected() {
         &86400u64,
         &0u32,
     );
-    assert_eq!(result, Err(Ok(PayrollError::ZeroNumPeriods.into())));
+    assert_eq!(result, Err(Ok(PayrollError::ZeroNumPeriods)));
 }
 
 /// Verifies that creating an escrow agreement with u32::MAX num_periods
@@ -389,7 +389,7 @@ fn test_escrow_max_u64_period_seconds_overflow_rejected() {
         &u64::MAX,
         &2u32,
     );
-    assert_eq!(result, Err(Ok(PayrollError::InvalidData.into())));
+    assert_eq!(result, Err(Ok(PayrollError::InvalidData)));
 }
 
 // ---------- Payroll Employee Salary Amounts ----------
